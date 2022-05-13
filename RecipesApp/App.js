@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 // import { createSwitchNavigator, createAppContainer } from 'react-navigation';
 
 import Login from './src/Pages/Login';
-// import Home from './src/Pages/Home';
+import Testando from './src/Pages/Testando';
 
 
 export default function App() {

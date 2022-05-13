@@ -1,12 +1,23 @@
 import React from 'react';
-import { StyleSheet, Text, View, ImageBackground, Image, Linking, Button } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ImageBackground,
+  Image,
+  Linking,
+  Button,
+  SafeAreaView
+} from 'react-native';
+
+import FormLogin from '../Components/Login/FormLogin';
 
 export default function Login() {
   const backgroundImageUrl = '.././img/fundoLogin.png'
   const urlLogo = '.././img/Logo.png'
 
   return(
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <ImageBackground
         source={require(backgroundImageUrl)}
         resizeMode="stretch"
@@ -25,9 +36,9 @@ export default function Login() {
             require(urlLogo)
           }
         />
-        <View><Text style={{color: 'white'}}>Form</Text></View>
+        <View><FormLogin /></View>
       </ImageBackground>
-    </View>
+    </SafeAreaView>
   )
 }
 
