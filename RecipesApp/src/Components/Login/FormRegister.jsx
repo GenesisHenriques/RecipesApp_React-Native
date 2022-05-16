@@ -4,11 +4,11 @@ import { View, Button, Text,  TextInput, StyleSheet, TouchableHighlight } from "
 // https://reactnative.dev/docs/textinput - textinput
 
 export default function FormLogin() {
-  const [imputName, setImputName] = useState(null);
-  const [imputEmail, setImputEmail] = useState(null);
-  const [imputSenha, setImputSenha] = useState(null);
+  const [inputName, setInputName] = useState(null);
+  const [inputEmail, setInputEmail] = useState(null);
+  const [inputSenha, setInputSenha] = useState(null);
 
-  function handlerImput(text, set) {
+  function handlerInput(text, set) {
     set(text)
   }
 
@@ -16,24 +16,24 @@ export default function FormLogin() {
     <View style={styles.container}>
       <TextInput
         placeholder='Nome'
-        style={styles.imputs}
-        value={imputName}
-        onChangeText={(text) => handlerImput(text, setImputName)}
+        style={styles.inputs}
+        value={inputName}
+        onChangeText={(text) => handlerInput(text, setInputName)}
         multiline={false}
         keyboardType="email-address"
       />
       <TextInput
         placeholder='Email'
-        style={styles.imputs}
-        value={imputEmail}
-        onChangeText={(text) =>  handlerImput(text, setImputEmail)}
+        style={styles.inputs}
+        value={inputEmail}
+        onChangeText={(text) =>  handlerInput(text, setInputEmail)}
         multiline={false}
       />
       <TextInput
         placeholder='Senha'
-        style={styles.imputs}
-        value={imputSenha}
-        onChangeText={(text) => handlerImput(text, setImputSenha)}
+        style={styles.inputs}
+        value={inputSenha}
+        onChangeText={(text) => handlerInput(text, setInputSenha)}
         multiline={false}
         secureTextEntry={true}
       />
@@ -41,7 +41,7 @@ export default function FormLogin() {
         style={styles.buttons}
         onPress={() => Linking.openURL('https://github.com/GenesisHenriques')}
       >
-        <Text>ENTRAR</Text>
+        <Text>CADASTRAR</Text>
       </TouchableHighlight>
     </View>
   )
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center'
   },
-  imputs: {
+  inputs: {
     color: 'gray',
     borderWidth: 1,
     padding: 15,

@@ -4,24 +4,24 @@ import { View, Button, Text,  TextInput, StyleSheet, TouchableHighlight } from "
 // https://reactnative.dev/docs/textinput - textinput
 
 export default function FormLogin() {
-  const [imputLogin, setImputLogin] = useState(null);
-  const [imputSenha, setImputSenha] = useState(null);
+  const [inputLogin, setInputLogin] = useState(null);
+  const [inputSenha, setInputSenha] = useState(null);
 
   return(
     <View>
       <TextInput
         placeholder='usuario@gmail.com'
-        style={styles.imputs}
-        value={imputLogin}
-        onChangeText={(e) => setImputLogin(e)}
+        style={styles.inputs}
+        value={inputLogin}
+        onChangeText={(e) => setInputLogin(e)}
         multiline={false}
         keyboardType="email-address"
       />
       <TextInput
         placeholder='********'
-        style={styles.imputs}
-        value={imputSenha}
-        onChangeText={(e) => setImputSenha(e)}
+        style={styles.inputs}
+        value={inputSenha}
+        onChangeText={(e) => setInputSenha(e)}
         multiline={false}
         secureTextEntry={true}
       />
@@ -44,7 +44,7 @@ export default function FormLogin() {
 }
 
 const styles = StyleSheet.create({
-  imputs: {
+  inputs: {
     color: 'gray',
     borderWidth: 1,
     padding: 15,
