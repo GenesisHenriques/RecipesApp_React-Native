@@ -1,10 +1,11 @@
 import React, {useState} from 'react'
-import { View, Button, TextInput, StyleSheet } from "react-native"
+import { View, Button, Text,  TextInput, StyleSheet, TouchableHighlight } from "react-native"
 
 // https://reactnative.dev/docs/textinput - textinput
 
 export default function FormLogin() {
   const [imputLogin, setImputLogin] = useState(null);
+  const [imputSenha, setImputSenha] = useState(null);
 
   return(
     <View>
@@ -14,25 +15,29 @@ export default function FormLogin() {
         value={imputLogin}
         onChangeText={(e) => setImputLogin(e)}
         multiline={false}
+        keyboardType="email-address"
       />
       <TextInput
         placeholder='********'
         style={styles.imputs}
-        value={imputLogin}
-        onChangeText={(e) => setImputLogin(e)}
+        value={imputSenha}
+        onChangeText={(e) => setImputSenha(e)}
         multiline={false}
+        secureTextEntry={true}
       />
       <View style={styles.viewButtons}>
-      <Button
+        <TouchableHighlight
           style={styles.buttons}
           onPress={() => Linking.openURL('https://github.com/GenesisHenriques')}
-          title={'ENTRAR'}
-      />
-      <Button
+        >
+          <Text>ENTRAR</Text>
+        </TouchableHighlight>
+        <TouchableHighlight
           style={styles.buttons}
           onPress={() => Linking.openURL('https://github.com/GenesisHenriques')}
-          title={'CADASTRAR'}
-      />
+        >
+          <Text>CADASTRAR</Text>
+        </TouchableHighlight>
       </View>
     </View>
   )
@@ -40,20 +45,28 @@ export default function FormLogin() {
 
 const styles = StyleSheet.create({
   imputs: {
+    color: 'gray',
     borderWidth: 1,
-    padding: 10,
+    padding: 15,
     backgroundColor: 'white',
-    width: 250,
-    height: 50,
+    width: 300,
+    fontSize: 15,
     borderBottomWidth: 1,
     borderColor: '#000',
-    borderRadius: 5,
+    borderRadius: 10,
     margin: 10,
   },
   viewButtons: {
-    backgroundColor: 'red',
+    flexDirection: 'row',
+    justifyContent:'center'
   },
   buttons: {
-    width: 10,
+    backgroundColor: '#B6D048',
+    alignItems: 'center',
+    padding: 19,
+    fontSize: 15,
+    borderRadius: 10,
+    width: 135,
+    margin: 10,
   }
 });

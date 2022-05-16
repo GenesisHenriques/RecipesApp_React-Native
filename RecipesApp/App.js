@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import Login from './src/Pages/Login';
 import Testando from './src/Pages/Testando';
+import Testando2 from './src/Pages/Testando2';
 
 
 export default function App() {

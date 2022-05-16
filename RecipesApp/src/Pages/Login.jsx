@@ -6,8 +6,8 @@ import {
   ImageBackground,
   Image,
   Linking,
-  Button,
-  SafeAreaView
+  SafeAreaView,
+  TouchableHighlight
 } from 'react-native';
 
 import FormLogin from '../Components/Login/FormLogin';
@@ -23,12 +23,13 @@ export default function Login() {
         resizeMode="stretch"
         style={styles.backgroundImage}
       >
-        <View>
-        <Button
-          style={{color: 'White'}}
+        <View style={styles.githubView}>
+        <TouchableHighlight
+          style={styles.GithubButton}
           onPress={() => Linking.openURL('https://github.com/GenesisHenriques')}
-          title={'GitHub'}
-        />
+        >
+          <Text>GitHub</Text>
+        </TouchableHighlight>
         </View>
         <Image
           style={styles.logo}
@@ -46,6 +47,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  githubView: {
+    paddingLeft: 20,
+    width: '100%',
+    alignItems: 'flex-start',
+  },
   backgroundImage: {
     flex: 1,
     justifyContent: "space-evenly",
@@ -56,4 +62,9 @@ const styles = StyleSheet.create({
     width:250,
     resizeMode: 'contain',
   },
+  GithubButton: {
+    backgroundColor: 'white',
+    padding: 10,
+    borderRadius: 10
+  }
 });
