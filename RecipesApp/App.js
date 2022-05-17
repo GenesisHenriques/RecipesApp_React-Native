@@ -6,10 +6,11 @@ import Login from './src/Pages/Login';
 import Register from './src/Pages/Register';
 import Testando from './src/Pages/Testando';
 import Testando2 from './src/Pages/Testando2';
+import Testando3 from './src/Pages/Testando3';
 
 
 export default function App() {
   return (
-    <Register />
+    <Testando3 />
   );
 }
