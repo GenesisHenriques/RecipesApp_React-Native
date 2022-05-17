@@ -4,46 +4,53 @@ import { View, Button, Text,  TextInput, StyleSheet, TouchableHighlight } from "
 // https://reactnative.dev/docs/textinput - textinput
 
 export default function FormLogin() {
-  const [inputLogin, setInputLogin] = useState(null);
+  const [inputName, setInputName] = useState(null);
+  const [inputEmail, setInputEmail] = useState(null);
   const [inputSenha, setInputSenha] = useState(null);
 
+  function handlerInput(text, set) {
+    set(text)
+  }
+
   return(
-    <View>
+    <View style={styles.container}>
       <TextInput
-        placeholder='usuario@gmail.com'
+        placeholder='Nome'
         style={styles.inputs}
-        value={inputLogin}
-        onChangeText={(e) => setInputLogin(e)}
+        value={inputName}
+        onChangeText={(text) => handlerInput(text, setInputName)}
         multiline={false}
         keyboardType="email-address"
       />
       <TextInput
-        placeholder='********'
+        placeholder='Email'
+        style={styles.inputs}
+        value={inputEmail}
+        onChangeText={(text) =>  handlerInput(text, setInputEmail)}
+        multiline={false}
+      />
+      <TextInput
+        placeholder='Senha'
         style={styles.inputs}
         value={inputSenha}
-        onChangeText={(e) => setInputSenha(e)}
+        onChangeText={(text) => handlerInput(text, setInputSenha)}
         multiline={false}
         secureTextEntry={true}
       />
-      <View style={styles.viewButtons}>
-        <TouchableHighlight
-          style={styles.buttons}
-          onPress={() => Linking.openURL('https://github.com/GenesisHenriques')}
-        >
-          <Text>ENTRAR</Text>
-        </TouchableHighlight>
-        <TouchableHighlight
-          style={styles.buttons}
-          onPress={() => Linking.openURL('https://github.com/GenesisHenriques')}
-        >
-          <Text>CADASTRAR</Text>
-        </TouchableHighlight>
-      </View>
+      <TouchableHighlight
+        style={styles.buttons}
+        onPress={() => Linking.openURL('https://github.com/GenesisHenriques')}
+      >
+        <Text>CADASTRAR</Text>
+      </TouchableHighlight>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center'
+  },
   inputs: {
     color: 'gray',
     borderWidth: 1,
@@ -55,10 +62,7 @@ const styles = StyleSheet.create({
     borderColor: '#000',
     borderRadius: 10,
     margin: 10,
-  },
-  viewButtons: {
-    flexDirection: 'row',
-    justifyContent:'center'
+    textAlign: 'center',
   },
   buttons: {
     backgroundColor: '#B6D048',
