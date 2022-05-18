@@ -12,7 +12,7 @@ import {
 
 import FormLogin from '../Components/Login/FormLogin';
 
-export default function Login() {
+export default function Login({ navigation }) {
   const backgroundImageUrl = '.././img/fundoLogin.png'
   const urlLogo = '.././img/Logo.png'
 
@@ -37,7 +37,9 @@ export default function Login() {
             require(urlLogo)
           }
         />
-        <View><FormLogin /></View>
+        <View>
+          <FormLogin navigation={navigation} />
+        </View>
       </ImageBackground>
     </SafeAreaView>
   )
