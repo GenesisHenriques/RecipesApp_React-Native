@@ -22,7 +22,7 @@ export default function App() {
         barStyle='light-content'
         animated={true}
       />
-      <Stack.Navigator initialRouteName='Login'>
+      <Stack.Navigator initialRouteName='Home'>
         <Stack.Screen
           name='Login'
           component={Login}
@@ -35,8 +35,6 @@ export default function App() {
             headerTitleStyle: {
               fontWeight: 'bold'
             },
-            // headerRight:() => (<Text>oi</Text>)
-            //  Colocar uma opção do lado esquerdo do cabeçalho
           }}
         />
 
