@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import { StyleSheet, Text, View, Button, Switch, ScrollView, StatusBar } from 'react-native';
 
 export default function Testando() {
+  // React navigation
+  // https://reactnavigation.org/
 
   return(
     <View style={styles.container}>

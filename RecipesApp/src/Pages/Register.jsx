@@ -10,9 +10,12 @@ import {
   TouchableHighlight
 } from 'react-native';
 
-import FormRegister from '../Components/Login/FormRegister';
+import FormRegister from '../Components/Register/FormRegister';
 
-export default function Login() {
+export default function Login({ route }) {
+  // const { name } = route.params
+  // const { name } = route.params?
+
   const backgroundImageUrl = '.././img/fundoLogin.png'
   const urlLogo = '.././img/Logo.png'
 
@@ -24,12 +27,12 @@ export default function Login() {
         style={styles.backgroundImage}
       >
         <View style={styles.githubView}>
-        <TouchableHighlight
-          style={styles.GithubButton}
-          onPress={() => Linking.openURL('https://github.com/GenesisHenriques')}
-        >
-          <Text>GitHub</Text>
-        </TouchableHighlight>
+          <TouchableHighlight
+            style={styles.GithubButton}
+            onPress={() => Linking.openURL('https://github.com/GenesisHenriques')}
+          >
+            <Text>GitHub</Text>
+          </TouchableHighlight>
         </View>
         <Image
           style={styles.logo}
@@ -37,7 +40,9 @@ export default function Login() {
             require(urlLogo)
           }
         />
-        <View><FormRegister /></View>
+        <View>
+          <FormRegister />
+        </View>
       </ImageBackground>
     </SafeAreaView>
   )

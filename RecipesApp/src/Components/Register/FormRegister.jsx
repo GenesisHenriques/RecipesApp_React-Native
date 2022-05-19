@@ -53,13 +53,11 @@ const styles = StyleSheet.create({
   },
   inputs: {
     color: 'gray',
-    borderWidth: 1,
     padding: 15,
     backgroundColor: 'white',
     width: 300,
     fontSize: 15,
     borderBottomWidth: 1,
-    borderColor: '#000',
     borderRadius: 10,
     margin: 10,
     textAlign: 'center',
