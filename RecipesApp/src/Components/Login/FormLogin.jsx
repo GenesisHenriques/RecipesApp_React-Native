@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import { View, Button, Text,  TextInput, StyleSheet, TouchableHighlight } from "react-native"
+import React, {useState} from 'react';
+import { View, Button, Text,  TextInput, StyleSheet, TouchableHighlight } from "react-native";
 
 // https://reactnative.dev/docs/textinput - textinput
 

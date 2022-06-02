@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -10,28 +10,30 @@ import Drinks from '.././Components/Home/Drinks';
 import ToExplore from '../Components/Home/ToExplore';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { fetchFilteredItems } from '../Utils/Fetch';
+import MyContext from '../Components/MyContext';
 
 const Tabs = createBottomTabNavigator();
 
-export default function Home({ navigation }) {
+const Home = () => {
   return(
     <Tabs.Navigator>
-        <Tabs.Screen
-          name='Foods'
-          component={Foods}
-          options = {{
-            headerRight:() => (<Text>Oiiiiiiii</Text>)
-          }}
-        />
-        <Tabs.Screen
-          name='ToExplore'
-          component={ToExplore}
-        />
-        <Tabs.Screen
-          name='Drinks'
-          component={Drinks}
-        />
-      </Tabs.Navigator>
+      <Tabs.Screen
+        name='Comidas'
+        component={Foods}
+        options = {{
+          headerRight:() => (<Text>Pesquisar</Text>)
+        }}
+      />
+      <Tabs.Screen
+        name='ToExplore'
+        component={ToExplore}
+      />
+      <Tabs.Screen
+        name='Drinks'
+        component={Drinks}
+      />
+    </Tabs.Navigator>
   )
 }
 
@@ -42,3 +44,5 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   }
 });
+
+export default Home;

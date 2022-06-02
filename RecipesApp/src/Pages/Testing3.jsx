@@ -1,22 +1,24 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View, Button, Switch, ScrollView, StatusBar } from 'react-native';
+import { ActivityIndicator } from 'react-native-web';
 
 export default function Testando() {
   // React navigation
   // https://reactnavigation.org/
+  const [carregando, setCarregando] = useState(true);
+  const [dados, setDados] = useState([]);
+
+  useEffect(() => {
+    fetch('cfbcursos.com.br/filmes.json')
+      .then((res) => res.json())
+      .then((json) => console.log(json))
+      .catch((err) => console.log(err))
+      .finally(() => setCarregando(false))
+  }, []);
 
   return(
     <View style={styles.container}>
-      <StatusBar
-        // https://reactnative.dev/docs/statusbar
-        backgroundColor='red'
-        barStyle='dark-content'
-        hidden={false}
-        animated={true}
-        networkActivityIndicatorVisible={false}
-        translucent={true}
-      />
-      <Text>Oooii</Text>
+      <Text>Oii</Text>
     </View>
   )
 }
