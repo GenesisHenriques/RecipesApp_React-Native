@@ -12,7 +12,7 @@ import {
 
 import FormRegister from '../Components/Register/FormRegister';
 
-export default function Login({ route }) {
+export default function Login({ navigation }) {
   // const { name } = route.params
   // const { name } = route.params?
 
@@ -41,7 +41,7 @@ export default function Login({ route }) {
           }
         />
         <View>
-          <FormRegister />
+          <FormRegister navigation={navigation} />
         </View>
       </ImageBackground>
     </SafeAreaView>

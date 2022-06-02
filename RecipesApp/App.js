@@ -39,12 +39,12 @@ export default function App() {
           barStyle='light-content'
           animated={true}
         />
-        <Stack.Navigator initialRouteName='Home'>
+        <Stack.Navigator initialRouteName='Login'>
           <Stack.Screen
             name='Login'
             component={Login}
             options={{
-              title: 'Login',
+              title: '',
               headerStyle: {
                 backgroundColor: '#000'
               },
@@ -52,6 +52,7 @@ export default function App() {
               headerTitleStyle: {
                 fontWeight: 'bold'
               },
+              headerTransparent: true,
             }}
           />
 
@@ -59,11 +60,12 @@ export default function App() {
             name='Register'
             component={Register}
             options={{
-              title: 'Register',
+              title: '',
               headerStyle: {
                 backgroundColor: '#000'
               },
-              headerTintColor: 'white'
+              headerTintColor: 'white',
+              headerTransparent: true,
             }}
           />
 
@@ -71,11 +73,12 @@ export default function App() {
             name='Home'
             component={Home}
             options={{
-              title: 'Home',
+              title: '',
               headerStyle: {
                 backgroundColor: '#000'
               },
-              headerTintColor: 'white'
+              headerTintColor: 'white',
+              headerTransparent: true,
             }}
           />
         </Stack.Navigator>

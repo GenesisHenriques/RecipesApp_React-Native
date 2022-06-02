@@ -28,7 +28,7 @@ export default function FormLogin({ navigation }) {
       <View style={styles.viewButtons}>
         <TouchableHighlight
           style={styles.buttons}
-          onPress={() => Linking.openURL('https://github.com/GenesisHenriques')}
+          onPress={() => navigation.navigate('Home', { name: "Genesis" })}
         >
           <Text>ENTRAR</Text>
         </TouchableHighlight>

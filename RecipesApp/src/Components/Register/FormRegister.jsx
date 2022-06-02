@@ -3,12 +3,12 @@ import { View, Button, Text,  TextInput, StyleSheet, TouchableHighlight } from "
 
 // https://reactnative.dev/docs/textinput - textinput
 
-export default function FormLogin() {
+export default function FormLogin({ navigation }) {
   const [inputName, setInputName] = useState(null);
   const [inputEmail, setInputEmail] = useState(null);
   const [inputSenha, setInputSenha] = useState(null);
 
-  function handlerInput(text, set) {
+  const handlerInput = (text, set) => {
     set(text)
   }
 
@@ -39,7 +39,7 @@ export default function FormLogin() {
       />
       <TouchableHighlight
         style={styles.buttons}
-        onPress={() => Linking.openURL('https://github.com/GenesisHenriques')}
+        onPress={() => navigation.navigate('Login')}
       >
         <Text>CADASTRAR</Text>
       </TouchableHighlight>

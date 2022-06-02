@@ -13,7 +13,7 @@ import {
 import FormLogin from '../Components/Login/FormLogin';
 
 export default function Login({ navigation }) {
-  const backgroundImageUrl = '.././img/fundoLogin.png'
+  const backgroundImageUrl = '../img/fundoLogin.png';
   const urlLogo = '.././img/Logo.png'
 
   return(
