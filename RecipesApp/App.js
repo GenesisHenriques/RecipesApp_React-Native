@@ -9,6 +9,7 @@ const Stack = createStackNavigator();
 import Login from './src/Pages/Login';
 import Register from './src/Pages/Register';
 import Home from './src/Pages/Home';
+import Recipe from './src/Pages/Recipe';
 
 import Testando from './src/Pages/Testing';
 import Testando2 from './src/Pages/Testing2';
@@ -39,7 +40,7 @@ export default function App() {
           barStyle='light-content'
           animated={true}
         />
-        <Stack.Navigator initialRouteName='Login'>
+        <Stack.Navigator initialRouteName='Recipe'>
           <Stack.Screen
             name='Login'
             component={Login}
@@ -72,6 +73,19 @@ export default function App() {
           <Stack.Screen
             name='Home'
             component={Home}
+            options={{
+              title: '',
+              headerStyle: {
+                backgroundColor: '#000'
+              },
+              headerTintColor: 'white',
+              headerTransparent: true,
+            }}
+          />
+
+          <Stack.Screen
+            name='Recipe'
+            component={Recipe}
             options={{
               title: '',
               headerStyle: {
