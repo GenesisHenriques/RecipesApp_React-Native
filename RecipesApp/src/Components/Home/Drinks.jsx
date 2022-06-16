@@ -8,7 +8,8 @@ import {
   Image,
   ActivityIndicator,
   FlatList,
-  ImageBackground
+  ImageBackground,
+  TouchableHighlight
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -17,7 +18,7 @@ import { drinkArray } from '../../ReduxToolkit/slices/selections';
 
 const backgroundImageUrl = '../../img/backgroundDrink.png';
 
-export default function Drinks() {
+export default function Drinks({ navigation }) {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const recipes = useSelector((state) => state.selections.drinkArray);
@@ -56,30 +57,36 @@ export default function Drinks() {
                 keyExtractor={(recipe) => recipe.idDrink}
                 renderItem={
                   ({item}) => (
-                    <View style={styles.cardContainer}>
-                      <Image
-                        style={styles.cardImage}
-                        source={{
-                          uri: item.strDrinkThumb,
-                        }}
-                      />
-                      <View style={ styles.infoPeople}>
+                    <TouchableHighlight
+                      activeOpacity={0.6}
+                      underlayColor="#DDDDDD"
+                      onPress={() => navigation.navigate('Recipe', {data: {type: 'drink', ...item} })}
+                    >
+                      <View style={styles.cardContainer}>
                         <Image
-                          style={styles.perfilImage}
+                          style={styles.cardImage}
                           source={{
-                            uri: 'https://www.psicologo.com.br/wp-content/uploads/sou-uma-pessoa-boa-ou-nao-1024x538.jpg',
+                            uri: item.strDrinkThumb,
                           }}
                         />
-                        <Text>Genesis</Text>
+                        <View style={ styles.infoPeople}>
+                          <Image
+                            style={styles.perfilImage}
+                            source={{
+                              uri: 'https://www.psicologo.com.br/wp-content/uploads/sou-uma-pessoa-boa-ou-nao-1024x538.jpg',
+                            }}
+                          />
+                          <Text>Genesis</Text>
+                        </View>
+                        <Text style={styles.CardTitle}>{item.strDrink}</Text>
+                        <Text>────────────────────</Text>
+                        <View style={styles.interactions}>
+                          <Icon name="heart-outline" size={25} color="black" />
+                          <Text style={styles.text}></Text>
+                          <Icon name="share-social-sharp" size={25} color="black" />
+                        </View>
                       </View>
-                      <Text style={styles.CardTitle}>{item.strDrink}</Text>
-                      <Text>────────────────────</Text>
-                      <View style={styles.interactions}>
-                        <Icon name="heart-outline" size={25} color="black" />
-                        <Text style={styles.text}></Text>
-                        <Icon name="share-social-sharp" size={25} color="black" />
-                      </View>
-                    </View>
+                    </TouchableHighlight>
                   )
                 }
               />

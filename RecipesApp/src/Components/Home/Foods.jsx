@@ -9,19 +9,20 @@ import {
   Image,
   StyleSheet,
   TouchableHighlight,
-  ImageBackground
+  ImageBackground,
+  Modal,
+  Button
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
-// import { createDrawerNavigator } from '@react-navigation/drawer';
 import { fetchFoods } from '../../Api';
 import { foodArray } from '../../ReduxToolkit/slices/selections';
 
 const backgroundImageUrl = '../../img/backgroundFood.png';
 
-// const Drawer = createDrawerNavigator();
-
 export default function Foods({ navigation }) {
+  const [modalVisible, setModalVisible] = useState(false);
+
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const recipes = useSelector((state) => state.selections.foodArray)
@@ -37,10 +38,6 @@ export default function Foods({ navigation }) {
   }, []);
 
   return (
-    /*<Drawer.Navigator>
-      <Drawer.Screen name="Drinks" component={Drinks} />
-      <Drawer.Screen name="ToExplore" component={ToExplore} />
-    </Drawer.Navigator>*/
     <SafeAreaView style={styles.container}>
       <ImageBackground
         source={require(backgroundImageUrl)}
@@ -55,7 +52,7 @@ export default function Foods({ navigation }) {
         />
         {
           loading ? <ActivityIndicator size="large" color="#00ff00"/> : (
-            <View // TouchableHighlight
+            <View
               style={styles.foodsContainer}
               onPress={() => console.log("Componente individual em construção")}
             >
@@ -64,30 +61,36 @@ export default function Foods({ navigation }) {
                 keyExtractor={(recipe) => recipe.idMeal}
                 renderItem={
                   ({item}) => (
-                    <View style={styles.cardContainer}>
-                      <Image
-                        style={styles.cardImage}
-                        source={{
-                          uri: item.strMealThumb,
-                        }}
-                      />
-                      <View style={ styles.infoPeople}>
+                    <TouchableHighlight
+                      activeOpacity={0.6}
+                      underlayColor="#DDDDDD"
+                      onPress={() => navigation.navigate('Recipe', {data: {type: 'food', ...item} })}
+                      >
+                      <View style={styles.cardContainer}>
                         <Image
-                          style={styles.perfilImage}
+                          style={styles.cardImage}
                           source={{
-                            uri: 'https://www.psicologo.com.br/wp-content/uploads/sou-uma-pessoa-boa-ou-nao-1024x538.jpg',
+                            uri: item.strMealThumb,
                           }}
                         />
-                        <Text>Genesis</Text>
+                        <View style={ styles.infoPeople}>
+                          <Image
+                            style={styles.perfilImage}
+                            source={{
+                              uri: 'https://www.psicologo.com.br/wp-content/uploads/sou-uma-pessoa-boa-ou-nao-1024x538.jpg',
+                            }}
+                          />
+                          <Text>Genesis</Text>
+                        </View>
+                        <Text style={styles.CardTitle}>{item.strMeal}</Text>
+                        <Text>────────────────────</Text>
+                        <View style={styles.interactions}>
+                          <Icon name="heart-outline" size={25} color="black" />
+                          <Text style={styles.text}></Text>
+                          <Icon name="share-social-sharp" size={25} color="black" />
+                        </View>
                       </View>
-                      <Text style={styles.CardTitle}>{item.strMeal}</Text>
-                      <Text>────────────────────</Text>
-                      <View style={styles.interactions}>
-                        <Icon name="heart-outline" size={25} color="black" />
-                        <Text style={styles.text}></Text>
-                        <Icon name="share-social-sharp" size={25} color="black" />
-                      </View>
-                    </View>
+                    </TouchableHighlight>
                   )
                 }
               />
@@ -153,5 +156,8 @@ const styles = StyleSheet.create({
   interactionsImg: {
     width: 30,
     height: 30,
-  }
+  },
+  modal: {
+    backgroundColor: 'red'
+  },
 });

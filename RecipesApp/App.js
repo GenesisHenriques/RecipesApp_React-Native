@@ -20,18 +20,7 @@ import { Provider } from 'react-redux';
 import store from './src/ReduxToolkit/store';
 
 export default function App() {
-  const [idade, setIdade] = useState(0);
-  const [foods, setFoods] = useState([]);
-
-  const contextValue = {
-    idade,
-    setIdade,
-    foods,
-    setFoods,
-  };
-
   return (
-    //<Testando3 />
     <Provider store={store}>
       <NavigationContainer>
         <StatusBar
@@ -40,7 +29,7 @@ export default function App() {
           barStyle='light-content'
           animated={true}
         />
-        <Stack.Navigator initialRouteName='Recipe'>
+        <Stack.Navigator initialRouteName='Home'>
           <Stack.Screen
             name='Login'
             component={Login}

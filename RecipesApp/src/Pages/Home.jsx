@@ -15,7 +15,7 @@ import Header from '../Components/Home/Header';
 
 const Tabs = createBottomTabNavigator();
 
-const Home = () => {
+const Home = ({ navigation }) => {
   return(
     <Tabs.Navigator
       screenOptions={{

@@ -1,55 +1,49 @@
 import React, { useCallback, useState } from 'react';
-import { Text, StyleSheet, View, ScrollView } from 'react-native';
+import { Text, StyleSheet, View, ScrollView, Button, Modal } from 'react-native';
 import { getIngredients } from '../../Utils/getIngredients';
-import YoutubeIframe from 'react-native-youtube-iframe';
+import YoutubePlayer from 'react-native-youtube-iframe';
 
 export default function InfoRecipe({ data }) {
-  const [playing, setPlaying] = useState(false);
   const ingredients = getIngredients(data);
+  const [playing, setPlaying] = useState(false);
 
   const onStateChange = useCallback((state) => {
     if (state === "ended") {
       setPlaying(false);
     }
-  }, []);
-
-  const togglePlaying = useCallback(() => {
-    setPlaying((prev) => !prev);
-  }, []);
-
-  function getIdVideo(url) {
-    return url.split("=")[1];
-  }
-
+  }, []);// strDrink strMeal
 
   return (
     <View style={styles.container}>
       <ScrollView>
-        <Text style={styles.title}>{data.strMeal}</Text>
+        <Text style={styles.title}>{data.type === 'food' ? data.strMeal : data.strDrink}</Text>
         <View>
-          <Text style={styles.title}>Ingredientes</Text>
+          <Text style={styles.title}>Ingredients</Text>
           {
-            ingredients.map((value) => <Text style={{ paddingLeft: 30 }}>{value}</Text>)
+            ingredients.map((value, index) => <Text key={index} style={{ paddingLeft: 30 }}>{value}</Text>)
           }
         </View>
         <View>
-          <Text style={styles.title}>Preparo</Text>
+          <Text style={styles.title}>Preparation</Text>
           <Text style={styles.text}>{data.strInstructions}</Text>
         </View>
         <Text style={styles.title}>──────────────</Text>
-        <View style={styles.centralize}>
-          <YoutubeIframe
-            width={280}
-            height={300}
-            play={playing}
-            videoId={getIdVideo(data.strYoutube)}
-            onChangeState={onStateChange}
-          />
-        </View>
       </ScrollView>
     </View>
   )
 }
+
+/*
+<View style={styles.centralize}>
+  <YoutubePlayer
+    width={280}
+    height={300}
+    play={playing}
+    videoId={"iee2TATGMyI"} // getIdVideo(data.strYoutube)
+    onChangeState={onStateChange}
+  />
+</View>
+*/
 
 const styles = StyleSheet.create({
   container: {
