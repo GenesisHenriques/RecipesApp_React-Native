@@ -24,12 +24,6 @@ export default function Login({ navigation }) {
         style={styles.backgroundImage}
       >
         <View style={styles.githubView}>
-        <TouchableHighlight
-          style={styles.GithubButton}
-          onPress={() => Linking.openURL('https://github.com/GenesisHenriques')}
-        >
-          <Text>GitHub</Text>
-        </TouchableHighlight>
         </View>
         <Image
           style={styles.logo}
@@ -40,6 +34,11 @@ export default function Login({ navigation }) {
         <View>
           <FormLogin navigation={navigation} />
         </View>
+        <TouchableHighlight
+          onPress={() => Linking.openURL('https://github.com/GenesisHenriques')}
+        >
+          <Text style={styles.Github}>github.com/GenesisHenriques</Text>
+        </TouchableHighlight>
       </ImageBackground>
     </SafeAreaView>
   )
@@ -64,9 +63,7 @@ const styles = StyleSheet.create({
     width:250,
     resizeMode: 'contain',
   },
-  GithubButton: {
-    backgroundColor: 'white',
-    padding: 10,
-    borderRadius: 10
+  Github: {
+    color: '#C7C7C7'
   }
 });
