@@ -53,12 +53,6 @@ export default function Drinks({ navigation }) {
         resizeMode="stretch"
         style={styles.backgroundImage}
       >
-        <Image
-          style={styles.tinyLogo}
-          source={{
-            uri: 'https://reactnative.dev/img/tiny_logo.png',
-          }}
-        />
         {
           loading ? <ActivityIndicator size="large" color="#00ff00"/> : (
             <View // TouchableHighlight

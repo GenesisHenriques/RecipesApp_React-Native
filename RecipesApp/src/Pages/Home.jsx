@@ -47,6 +47,8 @@ const Home = ({ navigation }) => {
         name='ToExplore'
         component={ToExplore}
         options = {{
+          headerTitle: '',
+          headerTransparent: true,
           tabBarLabel:"",
           tabBarIcon: ({ size, color }) => (
             <View style={styles.iconArea}>

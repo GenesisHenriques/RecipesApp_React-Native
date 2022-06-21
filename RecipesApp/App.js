@@ -10,12 +10,8 @@ import Login from './src/Pages/Login';
 import Register from './src/Pages/Register';
 import Home from './src/Pages/Home';
 import Recipe from './src/Pages/Recipe';
+import ExploreByRecipe from './src/Pages/ExploreByRecipe';
 
-import Testando from './src/Pages/Testing';
-import Testando2 from './src/Pages/Testing2';
-import Testando3 from './src/Pages/Testing3';
-
-import MyContext from './src/Components/MyContext';
 import { Provider } from 'react-redux';
 import store from './src/ReduxToolkit/store';
 
@@ -29,7 +25,7 @@ export default function App() {
           barStyle='light-content'
           animated={true}
         />
-        <Stack.Navigator initialRouteName='Login'>
+        <Stack.Navigator initialRouteName='Home'>
           <Stack.Screen
             name='Login'
             component={Login}
@@ -75,6 +71,19 @@ export default function App() {
           <Stack.Screen
             name='Recipe'
             component={Recipe}
+            options={{
+              title: '',
+              headerStyle: {
+                backgroundColor: '#000'
+              },
+              headerTintColor: 'white',
+              headerTransparent: true,
+            }}
+          />
+
+          <Stack.Screen
+            name='exploreByRecipe'
+            component={ExploreByRecipe}
             options={{
               title: '',
               headerStyle: {
