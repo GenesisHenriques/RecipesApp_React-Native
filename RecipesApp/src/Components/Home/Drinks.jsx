@@ -16,12 +16,25 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchDrinks } from '../../Api';
 import { drinkArray } from '../../ReduxToolkit/slices/selections';
 
+// importes para fontes.ttf
+import { useFonts } from 'expo-font';
+import AppLoading from 'expo-app-loading';
+
 const backgroundImageUrl = '../../img/backgroundDrink.png';
 
 export default function Drinks({ navigation }) {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const recipes = useSelector((state) => state.selections.drinkArray);
+
+  const [ fontsLoaded ] = useFonts({
+    "corva": require('../../../assets/fonts/Mt-corva.ttf'),
+    "Candara": require('../../../assets/fonts/Candara.ttf'),
+  });
+
+  if(!fontsLoaded) {
+    <AppLoading />
+  }
 
   useEffect(async () => {
     fetchDrinks()
@@ -69,14 +82,14 @@ export default function Drinks({ navigation }) {
                             uri: item.strDrinkThumb,
                           }}
                         />
-                        <View style={ styles.infoPeople}>
+                        <View style={styles.infoPeople}>
                           <Image
                             style={styles.perfilImage}
                             source={{
                               uri: 'https://www.psicologo.com.br/wp-content/uploads/sou-uma-pessoa-boa-ou-nao-1024x538.jpg',
                             }}
                           />
-                          <Text>Genesis</Text>
+                          <Text style={styles.employeeName}>Genesis</Text>
                         </View>
                         <Text style={styles.CardTitle}>{item.strDrink}</Text>
                         <Text>────────────────────</Text>
@@ -134,7 +147,8 @@ const styles = StyleSheet.create({
     marginLeft: -130,
   },
   CardTitle: {
-    backgroundColor: 'white'
+    fontFamily: 'corva',
+    fontSize: 30,
   },
   backgroundImage: {
     flex: 1,
@@ -152,5 +166,8 @@ const styles = StyleSheet.create({
   interactionsImg: {
     width: 30,
     height: 30,
+  },
+  employeeName: {
+    fontFamily: 'Candara',
   }
 });

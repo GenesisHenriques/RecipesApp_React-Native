@@ -29,7 +29,7 @@ export default function App() {
           barStyle='light-content'
           animated={true}
         />
-        <Stack.Navigator initialRouteName='Home'>
+        <Stack.Navigator initialRouteName='Login'>
           <Stack.Screen
             name='Login'
             component={Login}

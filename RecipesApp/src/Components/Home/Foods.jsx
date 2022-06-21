@@ -10,8 +10,6 @@ import {
   StyleSheet,
   TouchableHighlight,
   ImageBackground,
-  Modal,
-  Button
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -20,12 +18,24 @@ import { foodArray } from '../../ReduxToolkit/slices/selections';
 
 const backgroundImageUrl = '../../img/backgroundFood.png';
 
-export default function Foods({ navigation }) {
-  const [modalVisible, setModalVisible] = useState(false);
+// importes para fontes.ttf
+// import { useFonts, Jost_400Regular, Jost_700Bold } from '@expo-google-fonts/jost';
+import { useFonts } from 'expo-font';
+import AppLoading from 'expo-app-loading';
 
+export default function Foods({ navigation }) {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
-  const recipes = useSelector((state) => state.selections.foodArray)
+  const recipes = useSelector((state) => state.selections.foodArray);
+
+  const [ fontsLoaded ] = useFonts({
+    "corva": require('../../../assets/fonts/Mt-corva.ttf'),
+    "Candara": require('../../../assets/fonts/Candara.ttf'),
+  });
+
+  if(!fontsLoaded) {
+    <AppLoading />
+  }
 
   useEffect(async () => {
     fetchFoods()
@@ -80,7 +90,7 @@ export default function Foods({ navigation }) {
                               uri: 'https://www.psicologo.com.br/wp-content/uploads/sou-uma-pessoa-boa-ou-nao-1024x538.jpg',
                             }}
                           />
-                          <Text>Genesis</Text>
+                          <Text style={styles.employeeName}>Genesis</Text>
                         </View>
                         <Text style={styles.CardTitle}>{item.strMeal}</Text>
                         <Text>────────────────────</Text>
@@ -138,7 +148,8 @@ const styles = StyleSheet.create({
     marginLeft: -130,
   },
   CardTitle: {
-    backgroundColor: 'white'
+    fontFamily: 'corva',
+    fontSize: 30,
   },
   backgroundImage: {
     flex: 1,
@@ -160,4 +171,7 @@ const styles = StyleSheet.create({
   modal: {
     backgroundColor: 'red'
   },
+  employeeName: {
+    fontFamily: 'Candara',
+  }
 });

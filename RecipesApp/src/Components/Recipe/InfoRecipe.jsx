@@ -3,9 +3,22 @@ import { Text, StyleSheet, View, ScrollView, Button, Modal } from 'react-native'
 import { getIngredients } from '../../Utils/getIngredients';
 import YoutubePlayer from 'react-native-youtube-iframe';
 
+// importes para fontes.ttf
+import { useFonts } from 'expo-font';
+import AppLoading from 'expo-app-loading';
+
 export default function InfoRecipe({ data }) {
   const ingredients = getIngredients(data);
   const [playing, setPlaying] = useState(false);
+
+  const [ fontsLoaded ] = useFonts({
+    "corva": require('../../../assets/fonts/Mt-corva.ttf'),
+    "Candara": require('../../../assets/fonts/Candara.ttf'),
+  });
+
+  if(!fontsLoaded) {
+    <AppLoading />
+  }
 
   const onStateChange = useCallback((state) => {
     if (state === "ended") {
@@ -20,7 +33,7 @@ export default function InfoRecipe({ data }) {
         <View>
           <Text style={styles.title}>Ingredients</Text>
           {
-            ingredients.map((value, index) => <Text key={index} style={{ paddingLeft: 30 }}>{value}</Text>)
+            ingredients.map((value, index) => <Text key={index} style={styles.ingredientsText}>{value}</Text>)
           }
         </View>
         <View>
@@ -57,13 +70,19 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    fontSize: 20,
     textAlign: 'center',
-    padding: 20
+    padding: 20,
+    fontFamily: 'corva',
+    fontSize: 30,
   },
   text: {
     paddingLeft: 30,
-    paddingRight: 30
+    paddingRight: 30,
+    fontFamily: 'Candara'
+  },
+  ingredientsText: {
+    paddingLeft: 30,
+    fontFamily: 'Candara'
   },
   video: {
     width: 100,
