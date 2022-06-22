@@ -75,13 +75,14 @@ const Home = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   iconArea: {
-    backgroundColor: '#B6D048',
+    backgroundColor: 'white',
     borderRadius: 50,
     width: 80,
     height: 80,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 45
+    marginBottom: 45,
+    elevation: 5,
   }
 });
 

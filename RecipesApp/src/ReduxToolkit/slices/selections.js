@@ -5,7 +5,7 @@ export const selectionsSlice = createSlice({
   initialState: {
     foodArray: null,
     drinkArray: null,
-    testando: 'Genesis123'
+    areaFoodArray: null,
   },
   reducers: {
     foodArray: (state, action) => {
@@ -13,9 +13,12 @@ export const selectionsSlice = createSlice({
     },
     drinkArray: (state, action) => {
       state.drinkArray = action.payload
+    },
+    areaFoodArray: (state, action) => {
+      state.areaFoodArray = action.payload
     }
   }
 })
 
-export const { drinkArray, foodArray } = selectionsSlice.actions;
+export const { areaFoodArray, foodArray, drinkArray } = selectionsSlice.actions;
 export default selectionsSlice.reducer;

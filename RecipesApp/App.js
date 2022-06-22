@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React from 'react';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { StyleSheet, Text, View, StatusBar } from 'react-native';
+import { StatusBar } from 'react-native';
 
 const Stack = createStackNavigator();
 
@@ -14,6 +14,7 @@ import ExploreByRecipe from './src/Pages/ExploreByRecipe';
 
 import { Provider } from 'react-redux';
 import store from './src/ReduxToolkit/store';
+
 
 export default function App() {
   return (
