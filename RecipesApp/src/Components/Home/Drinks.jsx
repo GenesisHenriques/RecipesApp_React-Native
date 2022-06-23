@@ -127,6 +127,7 @@ const styles = StyleSheet.create({
   cardImage: {
     width: 270,
     height: 150,
+    borderRadius: 10
   },
   perfilImage: {
     width: 50,

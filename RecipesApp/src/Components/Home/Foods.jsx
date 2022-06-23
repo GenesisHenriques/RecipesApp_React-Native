@@ -18,8 +18,6 @@ import { foodArray } from '../../ReduxToolkit/slices/selections';
 
 const backgroundImageUrl = '../../img/backgroundFood.png';
 
-// importes para fontes.ttf
-// import { useFonts, Jost_400Regular, Jost_700Bold } from '@expo-google-fonts/jost';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 
@@ -128,6 +126,7 @@ const styles = StyleSheet.create({
   cardImage: {
     width: 270,
     height: 150,
+    borderRadius: 10
   },
   perfilImage: {
     width: 50,

@@ -16,10 +16,17 @@ export async function fetchFoodArea() {
   return data;
 }
 
+export async function fetchRecipeById(id) { // www.thecocktaildb.com/api/json/v1/1/lookup.php?i=52885
+  const response = await fetch(`www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
+  const data = await response.json();
+  return data;
+}
+
+
 export async function fetchByIngredients(type, name) {
   const urlType = type === 'food' ? 'www.themealdb' : 'www.thecocktaildb';
-  const urlSearchF = name === 'chicken_breast' ? '' : name;
-  const urlSearchD = name === 'Gin' ? '' : name;
+  const urlSearchF = name === '' ? 'chicken_breast' : name;
+  const urlSearchD = name === '' ? 'Gin' : name;
   const response = await fetch(`https://${urlType}.com/api/json/v1/1/filter.php?i=${
     type === 'food' ? urlSearchF : urlSearchD
   }`);
