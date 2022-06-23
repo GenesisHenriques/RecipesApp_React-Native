@@ -22,6 +22,13 @@ export async function fetchRecipeById(id) { // www.thecocktaildb.com/api/json/v1
   return data;
 }
 
+export async function fetchOneRecipeRandom(type) {
+  const urlF = 'www.thecocktaildb.com/api/json/v1/1/random.php';
+  const urlD = 'www.themealdb.com/api/json/v1/1/random.php';
+  const response = await fetch(type === 'food' ? urlF : urlD);
+  const data = await response.json();
+  return data;
+}
 
 export async function fetchByIngredients(type, name) {
   const urlType = type === 'food' ? 'www.themealdb' : 'www.thecocktaildb';
@@ -40,4 +47,3 @@ export async function fetchByIngredients(type, name) {
 
 // comida nome area    www.themealdb.com/api/json/v1/1/list.php?a=list
 // comida pega por area    www.themealdb.com/api/json/v1/1/filter.php?a=Canadian
-

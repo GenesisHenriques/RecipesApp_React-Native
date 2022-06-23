@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TextInput, FlatList, TouchableHighlight, Image } from "react-native";
+import { View, Text, StyleSheet, TextInput, FlatList, TouchableHighlight, Image, ActivityIndicator } from "react-native";
 
-import { fetchByIngredients, fetchRecipeById } from '../Api';
+import { fetchByIngredients, fetchRecipeById, fetchOneRecipeRandom } from '../Api';
 
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
@@ -159,6 +159,7 @@ export default function ExploreByRecipe({ route, navigation }) {
 
   const mock = type === 'food' ? mockDataFood : mockDataDrink;
 
+  const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [ searchedRecipes, setSearchedRecipes] = useState([]);
 
@@ -176,26 +177,34 @@ export default function ExploreByRecipe({ route, navigation }) {
         fetchByIngredients(type, search)
           .then((response => {
             setSearchedRecipes(response.meals);
+            setLoading(false);
           }))
-          .catch((err) => console.log(err))
+          .catch((err) => null)
           .finally(() => setLoading(false))
       } else if (by === 'placeOfOrigin') {
         console.log('a');
       } else { // surprise
-        console.log('b');
+        fetchOneRecipeRandom(type)
+          .then((response => {
+            console.log(response);
+            // setSearchedRecipes(response.meals);
+            setLoading(false);
+          }))
+          .catch((err) => null)
+          .finally(() => setLoading(false))
       }
     }
     if (type === 'drink') {
       if (by === 'ingredientes') {
         fetchByIngredients(type, search)
           .then((response => {
-            console.log(response.drinks);
             setSearchedRecipes(response.drinks);
+            setLoading(false);
           }))
-          .catch((err) => console.log(err))
+          .catch((err) => null)
           .finally(() => setLoading(false))
       } else { // surprise
-        console.log('a');
+        console.log('');
       }
     }
   }, [search]);
@@ -214,30 +223,34 @@ export default function ExploreByRecipe({ route, navigation }) {
         onChangeText={(e) => setSearch(e)}
         value={search}
       />
-      <FlatList
-        data={searchedRecipes === null ? mock : searchedRecipes}
-        keyExtractor={(recipe) => type === 'food' ? recipe.idMeal : recipe.idDrink}
-        renderItem={ // // idDrink  strDrink  strDrinkThumb // idMeal strMeal strMealThumb
-          ({item}) => (
-            <TouchableHighlight
-              activeOpacity={0.6}
-              underlayColor="#DDDDDD"
-              // navigation.navigate('Recipe', {data: {type: 'food', ...item} })
-              onPress={() => handlerFetchById(type === 'food' ? item.idMeal : item.idDrink)}
-              >
-              <View style={styles.cardContainer}>
-                <Image
-                  style={styles.cardImage}
-                  source={{
-                    uri: type === 'food' ? item.strMealThumb : item.strDrinkThumb,
-                  }}
-                />
-                <Text style={styles.CardTitle}>{type === 'food' ? item.strMeal : item.strDrink}</Text>
-              </View>
-            </TouchableHighlight>
-          )
-        }
-      />
+      {
+        loading ? <ActivityIndicator size="large" color="#00ff00"/> : (
+          <FlatList
+            data={searchedRecipes === null ? mock : searchedRecipes}
+            keyExtractor={(recipe) => type === 'food' ? recipe.idMeal : recipe.idDrink}
+            renderItem={ // // idDrink  strDrink  strDrinkThumb // idMeal strMeal strMealThumb
+              ({item}) => (
+                <TouchableHighlight
+                  activeOpacity={0.6}
+                  underlayColor="#DDDDDD"
+                  // navigation.navigate('Recipe', {data: {type: 'food', ...item} })
+                  onPress={() => handlerFetchById(type === 'food' ? item.idMeal : item.idDrink)}
+                  >
+                  <View style={styles.cardContainer}>
+                    <Image
+                      style={styles.cardImage}
+                      source={{
+                        uri: type === 'food' ? item.strMealThumb : item.strDrinkThumb,
+                      }}
+                    />
+                    <Text style={styles.CardTitle}>{type === 'food' ? item.strMeal : item.strDrink}</Text>
+                  </View>
+                </TouchableHighlight>
+              )
+            }
+          />
+        )
+      }
     </View>
   )
 }
