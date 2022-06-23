@@ -22,6 +22,7 @@ import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 
 export default function Foods({ navigation }) {
+  const [colorHeart, setColorHeart] = useState(true);
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const recipes = useSelector((state) => state.selections.foodArray);
@@ -64,7 +65,7 @@ export default function Foods({ navigation }) {
                 renderItem={
                   ({item}) => (
                     <TouchableHighlight
-                      activeOpacity={0.6}
+                      activeOpacity={0.3}
                       underlayColor="#DDDDDD"
                       onPress={() => navigation.navigate('Recipe', {data: {type: 'food', ...item} })}
                       >
@@ -87,7 +88,16 @@ export default function Foods({ navigation }) {
                         <Text style={styles.CardTitle}>{item.strMeal}</Text>
                         <Text>────────────────────</Text>
                         <View style={styles.interactions}>
-                          <Icon name="heart-outline" size={25} color="black" />
+                          <TouchableHighlight
+                            activeOpacity={1.0}
+                            underlayColor="none"
+                            onPress={() => setColorHeart(!colorHeart)}
+                          >
+                            <Icon
+                              name={colorHeart ? 'heart' : 'heart-outline'}
+                              size={25} color={colorHeart ? 'red' : 'black'}
+                            />
+                          </TouchableHighlight>
                           <Text style={styles.text}></Text>
                           <Icon name="share-social-sharp" size={25} color="black" />
                         </View>

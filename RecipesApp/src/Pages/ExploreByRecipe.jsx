@@ -1,10 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TextInput, FlatList, TouchableHighlight, Image, ActivityIndicator } from "react-native";
+import {
+  View,
+  SafeAreaView,
+  Text,
+  StyleSheet,
+  TextInput,
+  FlatList,
+  TouchableHighlight,
+  Image,
+  ActivityIndicator,
+  ImageBackground
+} from "react-native";
 
-import { fetchByIngredients, fetchRecipeById, fetchOneRecipeRandom } from '../Api';
+import {
+  fetchByIngredients,
+  fetchRecipeById,
+  fetchOneRecipeRandom,
+  fetchFoodArea,
+  fetchRecipesByArea
+} from '../Api';
 
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
+import { log } from 'react-native-reanimated';
 
 const mockDataFood = [
   {
@@ -152,6 +170,9 @@ const mockDataDrink = [
   },
 ]
 
+const backgroundImageUrlF = '../img/backgroundFood.png';
+const backgroundImageUrlD = '../img/backgroundDrink.png';
+const backgroundImageUrlE = '../img/backgroundExplore.png';
 
 export default function ExploreByRecipe({ route, navigation }) {
   const type = route.params.type;
@@ -161,6 +182,7 @@ export default function ExploreByRecipe({ route, navigation }) {
 
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
+  const [categories, setCategories] = useState([]);
   const [ searchedRecipes, setSearchedRecipes] = useState([]);
 
   const [ fontsLoaded ] = useFonts({
@@ -182,12 +204,11 @@ export default function ExploreByRecipe({ route, navigation }) {
           .catch((err) => null)
           .finally(() => setLoading(false))
       } else if (by === 'placeOfOrigin') {
-        console.log('a');
+        handlerFetchByArea(type);
       } else { // surprise
         fetchOneRecipeRandom(type)
           .then((response => {
-            console.log(response);
-            // setSearchedRecipes(response.meals);
+            setSearchedRecipes(response.meals);
             setLoading(false);
           }))
           .catch((err) => null)
@@ -204,54 +225,72 @@ export default function ExploreByRecipe({ route, navigation }) {
           .catch((err) => null)
           .finally(() => setLoading(false))
       } else { // surprise
-        console.log('');
+        fetchOneRecipeRandom(type)
+          .then((response => {
+            setSearchedRecipes(response.drinks);
+            setLoading(false);
+          }))
+          .catch((err) => null)
+          .finally(() => setLoading(false))
       }
     }
   }, [search]);
 
-  // fetchRecipeById(item.idMeal)
-  async function handlerFetchById(id) {
-    console.log(id);
-    const response = await fetchRecipeById(id);
-    console.log(response);
+  async function handlerFetchByArea(type) {
+    const response = await fetchRecipesByArea(search ,type);
+    setSearchedRecipes(response.meals);
+    setLoading(false);
+  };
+
+
+  async function handlerNavigation(item) { //meals  drinks
+    const id = type === 'food' ? item.idMeal : item.idDrink;
+    const response = await fetchRecipeById(id, type);
+    const a = type === 'food' ? response.meals : response.drinks;
+    navigation.navigate('Recipe', {data: {type, ...a[0]} });
   };
 
   return(
-    <View style={styles.containerInput}>
-      <TextInput
-        style={styles.inputs}
-        onChangeText={(e) => setSearch(e)}
-        value={search}
-      />
-      {
-        loading ? <ActivityIndicator size="large" color="#00ff00"/> : (
-          <FlatList
-            data={searchedRecipes === null ? mock : searchedRecipes}
-            keyExtractor={(recipe) => type === 'food' ? recipe.idMeal : recipe.idDrink}
-            renderItem={ // // idDrink  strDrink  strDrinkThumb // idMeal strMeal strMealThumb
-              ({item}) => (
-                <TouchableHighlight
-                  activeOpacity={0.6}
-                  underlayColor="#DDDDDD"
-                  // navigation.navigate('Recipe', {data: {type: 'food', ...item} })
-                  onPress={() => handlerFetchById(type === 'food' ? item.idMeal : item.idDrink)}
-                  >
-                  <View style={styles.cardContainer}>
-                    <Image
-                      style={styles.cardImage}
-                      source={{
-                        uri: type === 'food' ? item.strMealThumb : item.strDrinkThumb,
-                      }}
-                    />
-                    <Text style={styles.CardTitle}>{type === 'food' ? item.strMeal : item.strDrink}</Text>
-                  </View>
-                </TouchableHighlight>
-              )
-            }
-          />
-        )
-      }
-    </View>
+    <SafeAreaView style={styles.containerInput}>
+      <ImageBackground
+        source={require(backgroundImageUrlE)}
+        resizeMode="stretch"
+        style={styles.backgroundImage}
+      >
+        <TextInput
+          style={styles.inputs}
+          onChangeText={(e) => setSearch(e)}
+          value={search}
+        />
+        {
+          loading ? <ActivityIndicator size="large" color="#00ff00"/> : (
+            <FlatList
+              data={searchedRecipes === null ? mock : searchedRecipes}
+              keyExtractor={(recipe) => type === 'food' ? recipe.idMeal : recipe.idDrink}
+              renderItem={
+                ({item}) => (
+                  <TouchableHighlight
+                    activeOpacity={0.6}
+                    underlayColor="#DDDDDD"
+                    onPress={() => handlerNavigation(item)}
+                    >
+                    <View style={styles.cardContainer}>
+                      <Image
+                        style={styles.cardImage}
+                        source={{
+                          uri: type === 'food' ? item.strMealThumb : item.strDrinkThumb,
+                        }}
+                      />
+                      <Text style={styles.CardTitle}>{type === 'food' ? item.strMeal : item.strDrink}</Text>
+                    </View>
+                  </TouchableHighlight>
+                )
+              }
+            />
+          )
+        }
+      </ImageBackground>
+    </SafeAreaView>
   )
 }
 
@@ -259,7 +298,6 @@ const styles = StyleSheet.create({
   containerInput: {
     flex: 1,
     alignItems: 'center',
-    marginTop: 50
   },
   inputs: {
     color: 'gray',
@@ -268,7 +306,7 @@ const styles = StyleSheet.create({
     width: 300,
     fontSize: 15,
     borderRadius: 10,
-    marginTop: 15,
+    marginTop: 100,
     marginBottom: 30,
   },
   cardContainer: {
@@ -291,5 +329,11 @@ const styles = StyleSheet.create({
     marginTop: 30,
     fontFamily: 'corva',
     fontSize: 20,
+  },
+  backgroundImage: {
+    flex: 1,
+    justifyContent: "space-evenly",
+    alignItems: 'center',
+    width: "100%"
   },
 });

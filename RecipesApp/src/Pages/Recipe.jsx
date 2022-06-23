@@ -6,8 +6,9 @@ import InfoRecipe from '../Components/Recipe/InfoRecipe';
 
 const Recipe = ({ route, navigation }) => {
   const data = route.params.data;
+  console.log(data);
 
-  return ( // strDrinkThumb
+  return (
     <ImageBackground
       source={{
         uri: data.type === 'food' ? data.strMealThumb : data.strDrinkThumb

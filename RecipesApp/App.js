@@ -14,6 +14,7 @@ import ExploreByRecipe from './src/Pages/ExploreByRecipe';
 
 import { Provider } from 'react-redux';
 import store from './src/ReduxToolkit/store';
+import User from './src/Pages/User';
 
 
 export default function App() {
@@ -26,7 +27,7 @@ export default function App() {
           barStyle='light-content'
           animated={true}
         />
-        <Stack.Navigator initialRouteName='Home'>
+        <Stack.Navigator initialRouteName='Login'>
           <Stack.Screen
             name='Login'
             component={Login}
@@ -77,7 +78,7 @@ export default function App() {
               headerStyle: {
                 backgroundColor: '#000'
               },
-              headerTintColor: 'white',
+              headerTintColor: 'black',
               headerTransparent: true,
             }}
           />
@@ -88,9 +89,22 @@ export default function App() {
             options={{
               title: '',
               headerStyle: {
-                backgroundColor: '#000'
+                backgroundColor: 'red'
               },
-              headerTintColor: 'white',
+              headerTintColor: 'black',
+              headerTransparent: true,
+            }}
+          />
+
+          <Stack.Screen
+            name='User'
+            component={User}
+            options={{
+              title: '',
+              headerStyle: {
+                backgroundColor: 'red'
+              },
+              headerTintColor: 'black',
               headerTransparent: true,
             }}
           />

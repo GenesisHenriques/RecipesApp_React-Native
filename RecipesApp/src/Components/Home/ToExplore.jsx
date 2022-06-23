@@ -25,52 +25,80 @@ export default function ToExplore({ navigation }) {
       style={styles.backgroundImage}
     >
       <View style={styles.componentButtons}>
-        <TouchableHighlight onPress={() => setControllerFood(!visibleFood)}>
+        <TouchableHighlight
+          activeOpacity={0.3}
+          underlayColor="none"
+          onPress={() => setControllerFood(!visibleFood)}
+        >
           <Text style={styles.buttonExplore}>Explorar Comidas</Text>
         </TouchableHighlight>
         {
           visibleFood ?
           (
             <View>
-              <TouchableHighlight onPress={() => navigation.navigate('exploreByRecipe', {
-                type: 'food',
-                by: 'ingredientes'
-              })}>
+              <TouchableHighlight
+                activeOpacity={0.3}
+                underlayColor="none"
+                onPress={() => navigation.navigate('exploreByRecipe', {
+                  type: 'food',
+                  by: 'ingredientes'
+                })}
+              >
                 <Text style={styles.subButtonExplore}>Por ingrediente</Text>
               </TouchableHighlight>
-              <TouchableHighlight onPress={() => navigation.navigate('exploreByRecipe', {
-                type: 'food',
-                by: 'placeOfOrigin'
-              })}>
+              <TouchableHighlight
+                activeOpacity={0.3}
+                underlayColor="none"
+                onPress={() => navigation.navigate('exploreByRecipe', {
+                  type: 'food',
+                  by: 'placeOfOrigin'
+                })}
+              >
                 <Text style={styles.subButtonExplore}>Por local de origem</Text>
               </TouchableHighlight>
-              <TouchableHighlight onPress={() => navigation.navigate('exploreByRecipe', {
-                type: 'food',
-                by: 'surprise'
-              })}>
+              <TouchableHighlight
+                activeOpacity={0.3}
+                underlayColor="none"
+                onPress={() => navigation.navigate('exploreByRecipe', {
+                  type: 'food',
+                  by: 'surprise'
+                })}
+              >
                 <Text style={styles.subButtonExplore}>Me surpreenda</Text>
               </TouchableHighlight>
             </View>
           )
           : null
         }
-        <TouchableHighlight onPress={() => setControllerDrink(!visibleDrink)}>
+        <TouchableHighlight
+          activeOpacity={0.3}
+          underlayColor="none"
+          onPress={() => setControllerDrink(!visibleDrink)}
+        >
           <Text style={styles.buttonExplore}>Explorar Bebidas</Text>
         </TouchableHighlight>
         {
           visibleDrink ?
           (
             <View>
-              <TouchableHighlight onPress={() => navigation.navigate('exploreByRecipe', {
-                type: 'drink',
-                by: 'ingredientes'
-              })}>
+              <TouchableHighlight
+                activeOpacity={0.3}
+                underlayColor="none"
+                onPress={() => navigation.navigate('exploreByRecipe', {
+                  type: 'drink',
+                  by: 'ingredientes'
+                })}
+              >
                 <Text style={styles.subButtonExplore}>Por ingrediente</Text>
               </TouchableHighlight>
-              <TouchableHighlight onPress={() => navigation.navigate('exploreByRecipe', {
-                type: 'drink',
-                by: 'surprise'
-              })}>
+              <TouchableHighlight
+                activeOpacity={0.3}
+                underlayColor="none"
+                onPress={() => navigation.navigate('exploreByRecipe', {
+                  type: 'drink',
+                  by: 'surprise'
+                })}
+              >
                 <Text style={styles.subButtonExplore}>Me surpreenda</Text>
               </TouchableHighlight>
             </View>

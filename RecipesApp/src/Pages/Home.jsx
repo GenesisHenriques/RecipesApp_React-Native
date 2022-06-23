@@ -35,7 +35,7 @@ const Home = ({ navigation }) => {
         name='Comidas'
         component={Foods}
         options = {{
-          headerTitle: () => <Header />,
+          headerTitle: () => <Header navigation={ navigation } />,
           headerTransparent: true,
           tabBarLabel:"",
           tabBarIcon: ({ size, color }) => (

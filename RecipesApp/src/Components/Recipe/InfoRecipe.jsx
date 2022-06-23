@@ -1,15 +1,22 @@
 import React, { useCallback, useState } from 'react';
-import { Text, StyleSheet, View, ScrollView, Button, Modal } from 'react-native';
+import { Text, StyleSheet, View, ScrollView } from 'react-native';
+
 import { getIngredients } from '../../Utils/getIngredients';
-import YoutubePlayer from 'react-native-youtube-iframe';
+// import YoutubePlayer from 'react-native-youtube-iframe';
 
 // importes para fontes.ttf
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
+import { useEffect } from 'react';
 
 export default function InfoRecipe({ data }) {
   const ingredients = getIngredients(data);
-  const [playing, setPlaying] = useState(false);
+  // const [playing, setPlaying] = useState(false);
+  const [ArrayIngredients, setArrayIngredients] = useState([]);
+
+  useEffect(() => {
+    ingredients.map((value, index) => setArrayIngredients(ArrayIngredients.push(value)))
+  }, []);
 
   const [ fontsLoaded ] = useFonts({
     "corva": require('../../../assets/fonts/Mt-corva.ttf'),
@@ -19,12 +26,6 @@ export default function InfoRecipe({ data }) {
   if(!fontsLoaded) {
     <AppLoading />
   }
-
-  const onStateChange = useCallback((state) => {
-    if (state === "ended") {
-      setPlaying(false);
-    }
-  }, []);// strDrink strMeal
 
   return (
     <View style={styles.container}>
@@ -87,5 +88,5 @@ const styles = StyleSheet.create({
   video: {
     width: 100,
     height: 100
-  },
+  }
 });

@@ -4,18 +4,24 @@ import {
   Text,
   StyleSheet,
   View,
-  Image
+  TouchableHighlight
 } from 'react-native';
 
 const perfilUrl = '../../img/iconPerfil.png';
 const searchUrl = '../../img/iconSearch.png';
 
-export default function Header(props) {
+export default function Header({ navigation }) {
   return (
     <View style={styles.container}>
-      <Icon name="person-outline" size={30} color="white" />
+      <Icon name="" size={30} color="white" />
       <Text style={styles.text}></Text>
-      <Icon name="search-outline" size={30} color="white" />
+      <TouchableHighlight
+        activeOpacity={0.3}
+        underlayColor="none"
+        onPress={() => navigation.navigate('User', {})}
+      >
+        <Icon name="person-outline" size={30} color="white" />
+      </TouchableHighlight>
     </View>
   )
 }
